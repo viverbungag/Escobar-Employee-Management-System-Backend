@@ -127,9 +127,9 @@ INSERT INTO menu_ingredients(menu_id, supply_id, quantity) VALUES (12, 14, 1);
 INSERT INTO menu_ingredients(menu_id, supply_id, quantity) VALUES (13, 15, 1);
 INSERT INTO menu_ingredients(menu_id, supply_id, quantity) VALUES (14, 16, 1);
 
-INSERT INTO employee_position(position_name, is_active) VALUES ("Waiter", true);
-INSERT INTO employee_position(position_name, is_active) VALUES ("Manager", true);
-INSERT INTO employee_position(position_name, is_active) VALUES ("Chef", true);
+INSERT INTO employee_position(employee_position_name, is_active) VALUES ("Waiter", true);
+INSERT INTO employee_position(employee_position_name, is_active) VALUES ("Manager", true);
+INSERT INTO employee_position(employee_position_name, is_active) VALUES ("Chef", true);
 
 INSERT INTO employee_attendance(check_in, check_out) VALUES ('2022-08-10 08:00:00', '2022-08-10 17:00:00');
 INSERT INTO employee_attendance(check_in, check_out) VALUES ('2022-08-11 08:11:00', '2022-08-10 17:00:00');
@@ -143,9 +143,9 @@ INSERT INTO employee_attendance(check_in, check_out) VALUES ('2022-08-11 08:00:0
 INSERT INTO employee_attendance(check_in, check_out) VALUES ('2022-08-12 08:01:00', '2022-08-10 17:00:00');
 INSERT INTO employee_attendance(check_in, check_out) VALUES ('2022-08-13 08:02:00', '2022-08-10 17:00:00');
 
-INSERT INTO employee(employee_first_name, employee_last_name, employee_address, employee_contact_number, date_employed, position_id, superior_employee_id) VALUES ("Jay", "Tan", "Davao", "0923456789", '2020-03-22', 2, NULL);
-INSERT INTO employee(employee_first_name, employee_last_name, employee_address, employee_contact_number, date_employed, position_id, superior_employee_id) VALUES ("Viver", "Bungag", "Manila", "0912345678", '2020-01-10', 1, 2);
-INSERT INTO employee(employee_first_name, employee_last_name, employee_address, employee_contact_number, date_employed, position_id, superior_employee_id) VALUES ("Julienne", "Panes", "Cebu", "0934567891", '2019-12-25', 3, 2);
+INSERT INTO employee(employee_first_name, employee_last_name, employee_address, employee_contact_number, date_employed, employee_position_id, superior_employee_id) VALUES ("Jay", "Tan", "Davao", "0923456789", '2020-03-22', 2, NULL);
+INSERT INTO employee(employee_first_name, employee_last_name, employee_address, employee_contact_number, date_employed, employee_position_id, superior_employee_id) VALUES ("Viver", "Bungag", "Manila", "0912345678", '2020-01-10', 1, 2);
+INSERT INTO employee(employee_first_name, employee_last_name, employee_address, employee_contact_number, date_employed, employee_position_id, superior_employee_id) VALUES ("Julienne", "Panes", "Cebu", "0934567891", '2019-12-25', 3, 2);
 
 INSERT INTO employee_attendance_join(employee_id, attendance_id) VALUES (1, 1);
 INSERT INTO employee_attendance_join(employee_id, attendance_id) VALUES (1, 2);

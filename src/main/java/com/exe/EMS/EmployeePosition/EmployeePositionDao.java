@@ -16,4 +16,8 @@ public interface EmployeePositionDao {
     void activateEmployeePosition(List<String> employeePositionNames);
 
     List<EmployeePosition> getAllActiveEmployeePositionsList();
+
+    List<EmployeePosition> getAllActiveEmployeePositions();
+
+    List<EmployeePosition> getAllInactiveEmployeePositions();
 }

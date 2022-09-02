@@ -29,17 +29,17 @@ SET FOREIGN_KEY_CHECKS = 1;
 
 
 CREATE TABLE IF NOT EXISTS employee_position(
-    position_id BIGINT NOT NULL AUTO_INCREMENT,
-    position_name VARCHAR(255) NOT NULL,
+    employee_position_id BIGINT NOT NULL AUTO_INCREMENT,
+    employee_position_name VARCHAR(255) NOT NULL,
     is_active BOOLEAN DEFAULT true,
-    PRIMARY KEY (position_id)
+    PRIMARY KEY (employee_position_id)
 );
 
 CREATE TABLE IF NOT EXISTS employee_attendance(
-    attendance_id BIGINT NOT NULL AUTO_INCREMENT,
+    employee_attendance_id BIGINT NOT NULL AUTO_INCREMENT,
     check_in DATETIME,
     check_out DATETIME,
-    PRIMARY KEY (attendance_id)
+    PRIMARY KEY (employee_attendance_id)
 );
 
 CREATE TABLE IF NOT EXISTS employee_income_per_month(
@@ -62,21 +62,21 @@ CREATE TABLE IF NOT EXISTS employee(
 --    monthly_wage DECIMAL(10, 2),
 --    attendance_per_month_id BIGINT,
 --    income_id BIGINT,
-    position_id BIGINT,
+    employee_position_id BIGINT,
     superior_employee_id BIGINT NULL,
     PRIMARY KEY (employee_id),
 --    FOREIGN KEY (attendance_per_month_id) REFERENCES employee_attendance(attendance_id),
 --    FOREIGN KEY (income_id) REFERENCES employee_income_per_month(income_id),
-    FOREIGN KEY (position_id) REFERENCES employee_position(position_id),
+    FOREIGN KEY (employee_position_id) REFERENCES employee_position(employee_position_id),
     CONSTRAINT emp_superior FOREIGN KEY (superior_employee_id) REFERENCES employee(employee_id)
 );
 
 CREATE TABLE IF NOT EXISTS employee_attendance_join(
     employee_attendance_join_id BIGINT NOT NULL AUTO_INCREMENT,
     employee_id BIGINT,
-    attendance_id BIGINT,
+    employee_attendance_id BIGINT,
     PRIMARY KEY (employee_attendance_join_id),
-    FOREIGN KEY (attendance_id) REFERENCES employee_attendance(attendance_id),
+    FOREIGN KEY (employee_attendance_id) REFERENCES employee_attendance(employee_attendance_id),
     FOREIGN KEY (employee_id) REFERENCES employee(employee_id)
 );
 

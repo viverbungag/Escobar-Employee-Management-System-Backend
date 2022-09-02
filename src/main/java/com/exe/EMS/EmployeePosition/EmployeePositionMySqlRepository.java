@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-@Repository("supplyCategory_mysql")
+@Repository("employeePosition_mysql")
 public interface EmployeePositionMySqlRepository extends EmployeePositionDao, JpaRepository<EmployeePosition, Long> {
 
     @Modifying
@@ -43,4 +43,12 @@ public interface EmployeePositionMySqlRepository extends EmployeePositionDao, Jp
     @Query(value = "SELECT * FROM #{#entityName} WHERE is_active=true",
             nativeQuery = true)
     List<EmployeePosition> getAllActiveEmployeePositionsList();
+
+    @Query(value = "SELECT * FROM #{#entityName} WHERE is_active=true",
+            nativeQuery = true)
+    List<EmployeePosition> getAllActiveEmployeePositions();
+
+    @Query(value = "SELECT * FROM #{#entityName} WHERE is_active=false",
+            nativeQuery = true)
+    List<EmployeePosition> getAllInactiveEmployeePositions();
 }
