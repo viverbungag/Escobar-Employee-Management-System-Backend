@@ -23,8 +23,10 @@ DROP TABLE IF EXISTS account CASCADE;
 DROP TABLE IF EXISTS accessible_systems CASCADE;
 DROP TABLE IF EXISTS employee CASCADE;
 DROP TABLE IF EXISTS employee_income_per_month CASCADE;
+DROP TABLE IF EXISTS employee_attendance_join CASCADE;
 DROP TABLE IF EXISTS employee_attendance CASCADE;
 DROP TABLE IF EXISTS employee_position CASCADE;
+DROP TABLE IF EXISTS employee_type CASCADE;
 SET FOREIGN_KEY_CHECKS = 1;
 
 
@@ -33,6 +35,13 @@ CREATE TABLE IF NOT EXISTS employee_position(
     employee_position_name VARCHAR(255) NOT NULL,
     is_active BOOLEAN DEFAULT true,
     PRIMARY KEY (employee_position_id)
+);
+
+CREATE TABLE IF NOT EXISTS employee_type(
+    employee_type_id BIGINT NOT NULL AUTO_INCREMENT,
+    employee_type_name VARCHAR(255) NOT NULL,
+    is_active BOOLEAN DEFAULT true,
+    PRIMARY KEY (employee_type_id)
 );
 
 CREATE TABLE IF NOT EXISTS employee_attendance(
@@ -63,11 +72,13 @@ CREATE TABLE IF NOT EXISTS employee(
 --    attendance_per_month_id BIGINT,
 --    income_id BIGINT,
     employee_position_id BIGINT,
+    employee_type_id BIGINT,
     superior_employee_id BIGINT NULL,
     PRIMARY KEY (employee_id),
 --    FOREIGN KEY (attendance_per_month_id) REFERENCES employee_attendance(attendance_id),
 --    FOREIGN KEY (income_id) REFERENCES employee_income_per_month(income_id),
     FOREIGN KEY (employee_position_id) REFERENCES employee_position(employee_position_id),
+    FOREIGN KEY (employee_type_id) REFERENCES employee_type(employee_type_id),
     CONSTRAINT emp_superior FOREIGN KEY (superior_employee_id) REFERENCES employee(employee_id)
 );
 

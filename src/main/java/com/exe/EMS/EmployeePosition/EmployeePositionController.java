@@ -12,40 +12,40 @@ import java.util.Map;
 public class EmployeePositionController {
 
     @Autowired
-    EmployeePositionService supplyCategoryService;
+    EmployeePositionService employeePositionService;
 
     @GetMapping
     public List<String> getAllActiveEmployeePositionNames(){
-        return supplyCategoryService.getAllActiveEmployeePositionNames();
+        return employeePositionService.getAllActiveEmployeePositionNames();
     }
 
     @GetMapping("/active")
     public List<EmployeePositionDto> getAllActiveEmployeePositions(){
-        return supplyCategoryService.getAllActiveEmployeePositions();
+        return employeePositionService.getAllActiveEmployeePositions();
     }
 
     @GetMapping("/inactive")
     public List<EmployeePositionDto> getAllInactiveEmployeePositions(){
-        return supplyCategoryService.getAllInactiveEmployeePositions();
+        return employeePositionService.getAllInactiveEmployeePositions();
     }
 
     @PostMapping("/activate")
-    public void activateEmployeePosition(@RequestBody EmployeePositionListDto supplyCategoryListDto){
-        supplyCategoryService.activateEmployeePosition(supplyCategoryListDto);
+    public void activateEmployeePosition(@RequestBody EmployeePositionListDto employeePositionListDto){
+        employeePositionService.activateEmployeePosition(employeePositionListDto);
     }
 
     @PostMapping("/inactivate")
-    public void inactivateEmployeePosition(@RequestBody EmployeePositionListDto supplyCategoryListDto){
-        supplyCategoryService.inactivateEmployeePosition(supplyCategoryListDto);
+    public void inactivateEmployeePosition(@RequestBody EmployeePositionListDto employeePositionListDto){
+        employeePositionService.inactivateEmployeePosition(employeePositionListDto);
     }
 
     @PostMapping("/add")
-    public void addEmployeePosition(@RequestBody EmployeePositionDto supplyCategoryDto){
-        supplyCategoryService.addEmployeePosition(supplyCategoryDto);
+    public void addEmployeePosition(@RequestBody EmployeePositionDto employeePositionDto){
+        employeePositionService.addEmployeePosition(employeePositionDto);
     }
 
     @PutMapping("/update/{id}")
-    public void updateEmployeePosition(@RequestBody EmployeePositionDto supplyCategoryDto, @PathVariable Long id){
-        supplyCategoryService.updateEmployeePosition(supplyCategoryDto, id);
+    public void updateEmployeePosition(@RequestBody EmployeePositionDto employeePositionDto, @PathVariable Long id){
+        employeePositionService.updateEmployeePosition(employeePositionDto, id);
     }
 }

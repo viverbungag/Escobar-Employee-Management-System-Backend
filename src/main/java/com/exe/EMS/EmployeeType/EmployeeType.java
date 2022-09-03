@@ -1,4 +1,4 @@
-package com.exe.EMS.EmployeeAttendance;
+package com.exe.EMS.EmployeeType;
 
 
 import lombok.*;
@@ -7,8 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
-import java.time.LocalDateTime;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -19,20 +17,20 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Setter
 @ToString
 @EqualsAndHashCode
-@Entity(name = "employee_attendance")
-public class EmployeeAttendance {
+@Entity(name = "employee_type")
+public class EmployeeType {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "employee_attendance_id")
-    private Long employeeAttendanceId;
+    @Column(name = "employee_type_id")
+    private Long employeeTypeId;
 
     @NonNull
-    @Column(name = "check_in")
-    private LocalDateTime checkIn;
+    @Column(name = "employee_type_name")
+    private String employeeTypeName;
 
     @NonNull
-    @Column(name = "check_out")
-    private LocalDateTime checkOut;
+    @Column(name = "is_active")
+    private Boolean isActive;
 
 }
