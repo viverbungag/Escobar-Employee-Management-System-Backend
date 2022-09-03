@@ -3,10 +3,7 @@ package com.exe.EMS.EmployeeAttendance;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import java.time.LocalDateTime;
 
@@ -28,11 +25,12 @@ public class EmployeeAttendance {
     private Long employeeAttendanceId;
 
     @NonNull
-    @Column(name = "check_in")
-    private LocalDateTime checkIn;
+    @Column(name = "attendance_time")
+    private LocalDateTime attendanceTime;
 
     @NonNull
-    @Column(name = "check_out")
-    private LocalDateTime checkOut;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "attendance_type")
+    private AttendanceType attendanceType;
 
 }

@@ -43,7 +43,7 @@ public class Employee {
     private String employeeContactNumber;
 
     @NonNull
-    @Column(name = "employee_date_employed")
+    @Column(name = "date_employed")
     private LocalDateTime dateEmployed;
 
     @NonNull
@@ -60,4 +60,8 @@ public class Employee {
     @ManyToOne
     @JoinColumn(name = "superior_employee_id")
     private Employee superiorEmployee;
+
+    @NonNull
+    @Column(name = "is_active")
+    private Boolean isActive;
 }

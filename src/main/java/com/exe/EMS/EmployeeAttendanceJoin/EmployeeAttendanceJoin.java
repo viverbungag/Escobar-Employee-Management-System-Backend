@@ -26,7 +26,6 @@ public class EmployeeAttendanceJoin {
     private Long employeeAttendanceJoinId;
 
     @NonNull
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "employee_id")
     private Employee employee;

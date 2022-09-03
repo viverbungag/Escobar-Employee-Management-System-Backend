@@ -46,8 +46,8 @@ CREATE TABLE IF NOT EXISTS employee_type(
 
 CREATE TABLE IF NOT EXISTS employee_attendance(
     employee_attendance_id BIGINT NOT NULL AUTO_INCREMENT,
-    check_in DATETIME,
-    check_out DATETIME,
+    attendance_time DATETIME,
+    attendance_type VARCHAR(255),
     PRIMARY KEY (employee_attendance_id)
 );
 
@@ -74,6 +74,7 @@ CREATE TABLE IF NOT EXISTS employee(
     employee_position_id BIGINT,
     employee_type_id BIGINT,
     superior_employee_id BIGINT NULL,
+    is_active BOOLEAN DEFAULT true,
     PRIMARY KEY (employee_id),
 --    FOREIGN KEY (attendance_per_month_id) REFERENCES employee_attendance(attendance_id),
 --    FOREIGN KEY (income_id) REFERENCES employee_income_per_month(income_id),
