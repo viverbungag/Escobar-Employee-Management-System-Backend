@@ -23,4 +23,9 @@ public class EmployeeAttendanceJoinController {
     public List<EmployeeAttendanceJoinDto> getAllAttendanceBasedOnEmployeeId(@PathVariable String employeeName){
         return employeeAttendanceJoinService.getAllAttendanceBasedOnEmployeeId(employeeName);
     }
+
+    @PostMapping("/add")
+    public void addAttendance(@RequestBody EmployeeAttendanceJoinDto employeeAttendanceJoinDto){
+        employeeAttendanceJoinService.addAttendance(employeeAttendanceJoinDto);
+    }
 }

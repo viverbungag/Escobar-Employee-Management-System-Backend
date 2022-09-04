@@ -56,7 +56,6 @@ public class Employee {
     @JoinColumn(name = "employee_type_id")
     private EmployeeType employeeType;
 
-    @NonNull
     @ManyToOne
     @JoinColumn(name = "superior_employee_id")
     private Employee superiorEmployee;

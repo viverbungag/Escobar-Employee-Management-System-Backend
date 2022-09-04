@@ -24,9 +24,25 @@ public class EmployeeController {
         return employeeService.getAllInactiveEmployees();
     }
 
+    @PutMapping("/activate")
+    public void activateEmployees(@RequestBody EmployeeListDto employeeListDto){
+        employeeService.activateEmployees(employeeListDto);
+    }
+
+    @PutMapping("/inactivate")
+    public void inactivateEmployees(@RequestBody EmployeeListDto employeeListDto){
+        employeeService.inactivateEmployees(employeeListDto);
+    }
+
     @PostMapping("/add")
     public void addEmployee(@RequestBody EmployeeDto employeeDto){
         employeeService.addEmployee(employeeDto);
+    }
+
+    @PutMapping("/update/{id}")
+    public void updateEmployee(@RequestBody EmployeeDto employeeDto,
+                               @PathVariable Long id){
+        employeeService.updateEmployee(employeeDto, id);
     }
 
 

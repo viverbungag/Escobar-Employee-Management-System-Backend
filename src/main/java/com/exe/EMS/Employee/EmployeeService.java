@@ -1,5 +1,6 @@
 package com.exe.EMS.Employee;
 
+import com.exe.EMS.Employee.Exceptions.EmployeeIsExistingException;
 import com.exe.EMS.Employee.Exceptions.EmployeeNotFoundException;
 import com.exe.EMS.EmployeePosition.EmployeePosition;
 import com.exe.EMS.EmployeePosition.EmployeePositionDao;
@@ -14,6 +15,8 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -67,6 +70,24 @@ public class EmployeeService {
         return employees;
     }
 
+     public void activateEmployees(EmployeeListDto employeeListDto){
+        List<Long> employeeIds = employeeListDto
+                .getEmployeeListDto()
+                .stream()
+                .map((employeeDto) -> employeeDto.getEmployeeId())
+                .collect(Collectors.toList());
+        employeeRepository.activateEmployees(employeeIds);
+     }
+
+    public void inactivateEmployees(EmployeeListDto employeeListDto){
+        List<Long> employeeIds = employeeListDto
+                .getEmployeeListDto()
+                .stream()
+                .map((employeeDto) -> employeeDto.getEmployeeId())
+                .collect(Collectors.toList());
+        employeeRepository.inactivateEmployees(employeeIds);
+    }
+
     public void addEmployee(EmployeeDto employeeDto){
         String firstName = employeeDto.getEmployeeFirstName();
         String lastName = employeeDto.getEmployeeLastName();
@@ -80,12 +101,27 @@ public class EmployeeService {
         EmployeeType employeeType = employeeTypeRepository.getEmployeeTypeByName(employeeDto.getEmployeeTypeName())
                         .orElseThrow(() -> new EmployeeTypeNotFoundException(employeeDto.getEmployeeTypeName()));
 
-        Employee superior = employeeRepository.getEmployeeByFirstAndLastName(firstName, lastName)
-                        .orElseThrow(() -> new EmployeeNotFoundException(firstName, lastName));
+        String superiorName = employeeDto.getSuperiorEmployeeName();
+        Employee superior = null;
+
+        if (superiorName != null){
+            String[] superiorSplit = superiorName.split(", ");
+            String superiorLastName = superiorSplit[0];
+            String superiorFirstName = superiorSplit[1];
+
+            superior = employeeRepository.getEmployeeByFirstAndLastName(superiorFirstName, superiorLastName)
+                    .orElseThrow(() -> new EmployeeNotFoundException(firstName, lastName));
+
+        }
 
         Boolean isActive = employeeDto.getIsActive();
 
+        Optional<Employee> employeeOptional = employeeRepository
+                .getEmployeeByFirstAndLastName(firstName, lastName);
 
+        if (employeeOptional.isPresent()){
+            throw new EmployeeIsExistingException(firstName, lastName);
+        }
 
         employeeRepository.insertEmployees(firstName,
                 lastName,
@@ -94,7 +130,61 @@ public class EmployeeService {
                 dateEmployed,
                 employeePosition.getEmployeePositionId(),
                 employeeType.getEmployeeTypeId(),
-                superior.getEmployeeId(),
+                superior != null ? superior.getEmployeeId(): null,
                 isActive);
+    }
+
+    public void updateEmployee(EmployeeDto employeeDto, Long id){
+        Employee employee = employeeRepository
+                .getEmployeeById(id)
+                .orElseThrow(() -> new EmployeeNotFoundException(id));
+
+        String firstName = employeeDto.getEmployeeFirstName();
+        String lastName = employeeDto.getEmployeeLastName();
+        String address = employeeDto.getEmployeeAddress();
+        String contactNumber = employeeDto.getEmployeeContactNumber();
+        LocalDateTime dateEmployed = employeeDto.getDateEmployed();
+        EmployeePosition employeePosition = employeePositionRepository
+                .getEmployeePositionByName(employeeDto.getEmployeePositionName())
+                .orElseThrow(() -> new EmployeePositionNotFoundException(employeeDto.getEmployeePositionName()));
+
+        EmployeeType employeeType = employeeTypeRepository.getEmployeeTypeByName(employeeDto.getEmployeeTypeName())
+                .orElseThrow(() -> new EmployeeTypeNotFoundException(employeeDto.getEmployeeTypeName()));
+
+        String superiorName = employeeDto.getSuperiorEmployeeName();
+        Employee superior = null;
+
+        if (superiorName != null){
+            String[] superiorSplit = superiorName.split(", ");
+            String superiorLastName = superiorSplit[0];
+            String superiorFirstName = superiorSplit[1];
+
+            superior = employeeRepository.getEmployeeByFirstAndLastName(superiorFirstName, superiorLastName)
+                    .orElseThrow(() -> new EmployeeNotFoundException(firstName, lastName));
+        }
+
+        Boolean isActive = employeeDto.getIsActive();
+
+        if (!Objects.equals(employee.getEmployeeFirstName(), firstName) ||
+                !Objects.equals(employee.getEmployeeLastName(), lastName)){
+
+            Optional<Employee> employeeOptional = employeeRepository
+                    .getEmployeeByFirstAndLastName(firstName, lastName);
+
+            if (employeeOptional.isPresent()){
+                throw new EmployeeIsExistingException(firstName, lastName);
+            }
+
+            employee.setEmployeeFirstName(firstName);
+            employee.setEmployeeLastName(lastName);
+        }
+
+        employee.setEmployeeAddress(address);
+        employee.setEmployeeContactNumber(contactNumber);
+        employee.setDateEmployed(dateEmployed);
+        employee.setEmployeePosition(employeePosition);
+        employee.setEmployeeType(employeeType);
+        employee.setSuperiorEmployee(superior);
+        employee.setIsActive(isActive);
     }
 }

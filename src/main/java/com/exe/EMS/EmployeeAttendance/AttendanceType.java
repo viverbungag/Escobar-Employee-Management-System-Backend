@@ -1,8 +1,8 @@
 package com.exe.EMS.EmployeeAttendance;
 
 public enum AttendanceType {
-    CHECK_IN("CHECK IN"),
-    CHECK_OUT("CHECK OUT");
+    CHECK_IN("CHECK_IN"),
+    CHECK_OUT("CHECK_OUT");
 
     private final String string;
 
