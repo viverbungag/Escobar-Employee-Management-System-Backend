@@ -1,6 +1,6 @@
-package com.exe.EMS.Security;
+package com.exe.EMS.Account;
 
-import com.exe.escobar.IMSBackend.Employee.Employee;
+import com.exe.EMS.Employee.Employee;
 import lombok.*;
 
 import javax.persistence.*;
@@ -34,4 +34,24 @@ public class Account {
     @OneToOne
     @JoinColumn(name = "employee_id")
     private Employee employee;
+
+    @NonNull
+    @Column(name = "access_inventory_management_system")
+    private Boolean accessInventoryManagementSystem;
+
+    @NonNull
+    @Column(name = "access_employee_management_system")
+    private Boolean accessEmployeeManagementSystem;
+
+    @NonNull
+    @Column(name = "access_income_and_expense_system")
+    private Boolean accessIncomeAndExpenseSystem;
+
+    @NonNull
+    @Column(name = "access_ordering_system")
+    private Boolean accessOrderingSystem;
+
+    @NonNull
+    @Column(name = "is_active")
+    private Boolean isActive;
 }

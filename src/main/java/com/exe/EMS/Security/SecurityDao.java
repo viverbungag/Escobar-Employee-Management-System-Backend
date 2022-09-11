@@ -1,5 +1,6 @@
 package com.exe.EMS.Security;
 
+import com.exe.EMS.Account.Account;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;

@@ -1,6 +1,6 @@
 package com.exe.EMS.Security;
-
-import com.exe.escobar.IMSBackend.Security.Exceptions.UserDoesNotExistException;
+import com.exe.EMS.Account.Account;
+import com.exe.EMS.Security.Exceptions.UserDoesNotExistException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ public class SecurityService {
         return new AccountLoginDto(
                 account.getAccountUsername(),
                 account.getAccountPassword(),
-                String.format("%s, %s",account.getEmployee().getLastName(), account.getEmployee().getFirstName())
+                String.format("%s, %s",account.getEmployee().getEmployeeLastName(), account.getEmployee().getEmployeeFirstName())
         );
     }
 

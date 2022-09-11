@@ -36,6 +36,7 @@ public class EmployeePositionController {
 
     @PostMapping("/inactivate")
     public void inactivateEmployeePosition(@RequestBody EmployeePositionListDto employeePositionListDto){
+        System.out.println(employeePositionListDto);
         employeePositionService.inactivateEmployeePosition(employeePositionListDto);
     }
 
