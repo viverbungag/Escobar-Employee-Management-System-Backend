@@ -12,10 +12,12 @@ import java.util.Optional;
 @Repository("account_mysql")
 public interface AccountMySqlRepository extends AccountDao, JpaRepository<Account, Long> {
 
-    @Query(value= "SELECT * FROM #{#entityName} WHERE is_active = true")
+    @Query(value= "SELECT * FROM #{#entityName} WHERE is_active = true",
+        nativeQuery = true)
     List<Account> getAllActiveAccounts();
 
-    @Query(value= "SELECT * FROM #{#entityName} WHERE is_active = false")
+    @Query(value= "SELECT * FROM #{#entityName} WHERE is_active = false",
+            nativeQuery = true)
     List<Account> getAllInactiveAccounts();
 
     @Modifying
