@@ -154,7 +154,7 @@ public class EmployeeService {
         String superiorName = employeeDto.getSuperiorEmployeeName();
         Employee superior = null;
 
-        if (superiorName != null){
+        if (superiorName != null || superiorName.length() <= 0){
             String[] superiorSplit = superiorName.split(", ");
             String superiorLastName = superiorSplit[0];
             String superiorFirstName = superiorSplit[1];
