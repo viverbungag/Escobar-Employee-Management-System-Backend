@@ -24,12 +24,12 @@ public class EmployeeController {
         return employeeService.getAllInactiveEmployees();
     }
 
-    @PutMapping("/activate")
+    @PostMapping("/activate")
     public void activateEmployees(@RequestBody EmployeeListDto employeeListDto){
         employeeService.activateEmployees(employeeListDto);
     }
 
-    @PutMapping("/inactivate")
+    @PostMapping("/inactivate")
     public void inactivateEmployees(@RequestBody EmployeeListDto employeeListDto){
         employeeService.inactivateEmployees(employeeListDto);
     }
