@@ -10,6 +10,7 @@ import javax.persistence.Column;
 @ToString
 public class AccountLoginDto {
 
+    private Long accountId;
     private String accountUsername;
     private String accountPassword;
     private String employeeName;
@@ -17,4 +18,5 @@ public class AccountLoginDto {
     private Boolean accessEmployeeManagementSystem;
     private Boolean accessIncomeAndExpenseSystem;
     private Boolean accessOrderingSystem;
+    private Boolean isActive;
 }

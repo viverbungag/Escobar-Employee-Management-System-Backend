@@ -17,13 +17,15 @@ public class SecurityService {
 
     private AccountLoginDto convertEntityToDto(Account account){
         return new AccountLoginDto(
+                account.getAccountId(),
                 account.getAccountUsername(),
                 account.getAccountPassword(),
                 String.format("%s, %s",account.getEmployee().getEmployeeLastName(), account.getEmployee().getEmployeeFirstName()),
                 account.getAccessInventoryManagementSystem(),
                 account.getAccessEmployeeManagementSystem(),
                 account.getAccessIncomeAndExpenseSystem(),
-                account.getAccessOrderingSystem()
+                account.getAccessOrderingSystem(),
+                account.getIsActive()
         );
     }
 
