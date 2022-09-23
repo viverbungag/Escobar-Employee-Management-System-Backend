@@ -23,12 +23,12 @@ public class AccountController {
         return accountService.getAllInactiveAccounts();
     }
 
-    @PutMapping("/activate")
+    @PostMapping("/activate")
     public void activateAccounts(@RequestBody AccountUsernameListDto accountUsernameListDto){
         accountService.activateAccounts(accountUsernameListDto);
     }
 
-    @PutMapping("/inactivate")
+    @PostMapping("/inactivate")
     public void inactivateAccounts(@RequestBody AccountUsernameListDto accountUsernameListDto){
         accountService.inactivateAccounts(accountUsernameListDto);
     }

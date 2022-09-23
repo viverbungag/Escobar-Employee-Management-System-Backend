@@ -192,8 +192,8 @@ INSERT INTO transaction(transact_by, transaction_date, supplier_id, transaction_
 INSERT INTO transaction(transact_by, transaction_date, supplier_id, transaction_supply_quantity, supply_id, price_per_unit, expiry_date, transaction_type) VALUES (2, '2022-09-11', 2, 5, 2, 30, '2022-10-11', 'STOCK_IN');
 INSERT INTO transaction(transact_by, transaction_date, supplier_id, transaction_supply_quantity, supply_id, price_per_unit, expiry_date, transaction_type) VALUES (3, '2022-10-12', 3, 5, 3, 40, '2022-11-12', 'STOCK_IN');
 
-INSERT INTO account(account_username, account_password, employee_id) VALUES ('viver', 'password', 1);
-INSERT INTO account(account_username, account_password, employee_id) VALUES ('jay', 'password', 2);
+INSERT INTO account(account_username, account_password, employee_id) VALUES ('viver', 'password', 2);
+INSERT INTO account(account_username, account_password, employee_id) VALUES ('jay', 'password', 1);
 INSERT INTO account(account_username, account_password, employee_id) VALUES ('julienne', 'password', 3);
 
 INSERT INTO food_order(menu_id, menu_quantity) VALUES (2, 1);

@@ -8,5 +8,6 @@ import java.util.Optional;
 @Repository
 public interface SecurityDao {
 
-    Optional<Account> findUserByNameAndPassword(String accountUsername, String accountPassword);
+    Optional<Account> findEmployeeUserByNameAndPassword(String accountUsername, String accountPassword);
+    Optional<Account> findAdminUserByNameAndPassword(String accountUsername, String accountPassword);
 }

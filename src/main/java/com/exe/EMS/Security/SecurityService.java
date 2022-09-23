@@ -19,14 +19,28 @@ public class SecurityService {
         return new AccountLoginDto(
                 account.getAccountUsername(),
                 account.getAccountPassword(),
-                String.format("%s, %s",account.getEmployee().getEmployeeLastName(), account.getEmployee().getEmployeeFirstName())
+                String.format("%s, %s",account.getEmployee().getEmployeeLastName(), account.getEmployee().getEmployeeFirstName()),
+                account.getAccessInventoryManagementSystem(),
+                account.getAccessEmployeeManagementSystem(),
+                account.getAccessIncomeAndExpenseSystem(),
+                account.getAccessOrderingSystem()
         );
     }
 
-    public AccountLoginDto login (AccountLoginDto accountLoginDto){
+    public AccountLoginDto loginEmployee (AccountLoginDto accountLoginDto){
 
         Account account = securityRepository
-                .findUserByNameAndPassword(accountLoginDto.getAccountUsername(), accountLoginDto.getAccountPassword())
+                .findEmployeeUserByNameAndPassword(accountLoginDto.getAccountUsername(), accountLoginDto.getAccountPassword())
+                .orElseThrow(() -> new UserDoesNotExistException());
+
+        return convertEntityToDto(account);
+
+    }
+
+    public AccountLoginDto loginAdmin (AccountLoginDto accountLoginDto){
+
+        Account account = securityRepository
+                .findAdminUserByNameAndPassword(accountLoginDto.getAccountUsername(), accountLoginDto.getAccountPassword())
                 .orElseThrow(() -> new UserDoesNotExistException());
 
         return convertEntityToDto(account);

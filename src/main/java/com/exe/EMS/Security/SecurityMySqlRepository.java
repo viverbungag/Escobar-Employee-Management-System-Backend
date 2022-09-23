@@ -11,8 +11,19 @@ import java.util.Optional;
 @Repository("security_mysql")
 public interface SecurityMySqlRepository extends SecurityDao, JpaRepository<Account, Long> {
 
-    @Query(value = "SELECT * FROM #{#entityName} WHERE account_username = :accountUsername AND account_password = :accountPassword",
+    @Query(value = "SELECT * FROM #{#entityName} " +
+            "INNER JOIN employee AS employee ON account.employee_id = employee.employee_id " +
+            "INNER JOIN employee_type as employee_type ON employee.employee_type_id = employee_type.employee_type_id " +
+            "WHERE account_username = :accountUsername AND account_password = :accountPassword AND employee_type_name != 'Owner'",
             nativeQuery = true)
-    Optional<Account> findUserByNameAndPassword(@Param("accountUsername") String accountUsername,
+    Optional<Account> findEmployeeUserByNameAndPassword(@Param("accountUsername") String accountUsername,
+                                                @Param("accountPassword") String accountPassword);
+
+    @Query(value = "SELECT * FROM #{#entityName} AS account " +
+            "INNER JOIN employee AS employee ON account.employee_id = employee.employee_id " +
+            "INNER JOIN employee_type as employee_type ON employee.employee_type_id = employee_type.employee_type_id " +
+            "WHERE account_username = :accountUsername AND account_password = :accountPassword AND employee_type_name = 'Owner'",
+            nativeQuery = true)
+    Optional<Account> findAdminUserByNameAndPassword(@Param("accountUsername") String accountUsername,
                                                 @Param("accountPassword") String accountPassword);
 }
